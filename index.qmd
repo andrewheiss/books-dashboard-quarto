@@ -1,0 +1,412 @@
+---
+title: "The Heiss Family's 2024 books"
+format:
+  dashboard: 
+    scrolling: true
+    theme:
+      - flatly
+      - custom.scss
+---
+
+```{ojs}
+//| include: false
+
+d3 = require('d3')
+
+results = await d3.json(
+  "https://api.andrewheiss.com/books?person=all"
+)
+
+// This is wildly inefficient, but whatever
+data_alexander = results.alexander
+data_zoe = results.zoe
+data_benjamin = results.benjamin
+data_miriam = results.miriam
+data_rachel = results.rachel
+data_nancy = results.nancy
+data_andrew = results.andrew
+```
+
+# Current books
+
+## Alexander row {height=20%}
+
+::: {.card title="Alexander's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-alexander btn-lg" href="https://forms.gle/dtFtDZWRMxXbjvFg6" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_alexander.most_recent.author}, *\${data_alexander.most_recent.title}* on \${data_alexander.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="alexander"}
+Alexander's total books
+
+${data_alexander.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_alexander.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_alexander.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#1D6996",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Zoë row {height=20%}
+
+::: {.card title="Zoë's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-zoe btn-lg" href="https://forms.gle/MgW7HjMoeyZMJTYo9" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_zoe.most_recent.author}, *\${data_zoe.most_recent.title}* on \${data_zoe.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="zoe"}
+Zoë's total books
+
+${data_zoe.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_zoe.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_zoe.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#5F4690",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Benjamin row {height=20%}
+
+::: {.card title="Benjamin's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-benjamin btn-lg" href="https://forms.gle/oEgdqanWe6gkQz9W8" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_benjamin.most_recent.author}, *\${data_benjamin.most_recent.title}* on \${data_benjamin.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="benjamin"}
+Benjamin's total books
+
+${data_benjamin.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_benjamin.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_benjamin.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#0F8554",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Miriam row {height=20%}
+
+::: {.card title="Miriam's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-miriam btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_miriam.most_recent.author}, *\${data_miriam.most_recent.title}* on \${data_miriam.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="miriam"}
+Miriam's total books
+
+${data_miriam.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_miriam.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_miriam.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#CC503E",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Rachel row {height=20%}
+
+::: {.card title="Rachel's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-rachel btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_rachel.most_recent.author}, *\${data_rachel.most_recent.title}* on \${data_rachel.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="rachel"}
+Rachel's total books
+
+${data_rachel.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_rachel.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_rachel.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#38A6A5",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Nancy row {height=20%}
+
+::: {.card title="Nancy's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-nancy btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_nancy.most_recent.author}, *\${data_nancy.most_recent.title}* on \${data_nancy.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="nancy"}
+Nancy's total books
+
+${data_nancy.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_nancy.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_nancy.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#94346E",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+## Andrew row {height=20%}
+
+::: {.card title="Andrew's books"}
+```{=html}
+<p class="text-center">
+<a class="btn btn-andrew btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+</p>
+```
+
+**Last read:** \${data_andrew.most_recent.author}, *\${data_andrew.most_recent.title}* on \${data_andrew.most_recent.date}
+:::
+
+
+::: {.valuebox icon="book" color="andrew"}
+Andrew's total books
+
+${data_andrew.count[0]}
+:::
+
+
+```{ojs}
+Plot.plot({
+  marginBottom: 0,
+  marginLeft: 0,
+  y: {
+    label: "Books read",
+    grid: false,
+    percent: false
+  },
+  x: {
+    label: "Month",
+    domain: data_andrew.monthly_count.map(d => d.read_month_fct),
+  },
+  marks: [
+    Plot.ruleY([0]),
+    Plot.axisX({label: null, ticks: null}),
+    Plot.axisY({label: null, ticks: null}),
+
+    Plot.barY(data_andrew.monthly_count, {
+      x: "read_month_fct", 
+      y: "count", 
+      fill: "#E17C05",
+      tip: {
+        format: {
+          x: true,
+          y: true
+        }
+      }
+    })
+  ]
+})
+```
+
+
+# All books
+
+Do something where it shows a table of books filterable by person or something.
