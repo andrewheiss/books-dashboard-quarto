@@ -9,3 +9,5 @@ The three younger kids have Google Forms that they fill out. Everyone else uses 
 ### API
 
 The actual API is hosted elsewhere and uses a private GitHub repository, but I've included a sample {plumber} API that shows how I'm grabbing the data from Google Sheets.
+
+Alternatively, [see here for a more complete example of how this whole process works](https://www.andrewheiss.com/blog/2024/01/12/diy-api-plumber-quarto-ojs/).

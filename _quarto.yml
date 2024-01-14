@@ -1,0 +1,13 @@
+project:
+  type: website
+  output-dir: _site
+
+website:
+  title: "The Heiss Family's 2024 books"
+  favicon: assets/favicon.png
+
+format:
+  html:
+    theme:
+      - flatly
+      - custom.scss

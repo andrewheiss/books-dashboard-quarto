@@ -5,3 +5,6 @@
 
 index.html
 index_files/
+
+/.quarto/
+_site/

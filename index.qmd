@@ -3,9 +3,6 @@ title: "The Heiss Family's 2024 books"
 format:
   dashboard: 
     scrolling: true
-    theme:
-      - flatly
-      - custom.scss
 ---
 
 ```{ojs}
