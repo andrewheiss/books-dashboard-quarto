@@ -1,13 +1,37 @@
 project:
   type: website
   output-dir: _site
+  preview:
+    port: 4444
+  
+  render:
+    # Render all .qmd files
+    - "**/*.qmd"
+    # But not the Observable template file
+    - "!books/template.qmd"
 
 website:
   title: "The Heiss Family's 2024 books"
   favicon: assets/favicon.png
+  search: false
+  navbar:
+    background: "#CF4446"
+    left:
+      - text: "Overview"
+        file: index.qmd
+      - text: "See all books"
+        menu: 
+          - file: books/andrew.qmd
+          - file: books/nancy.qmd
+          - file: books/rachel.qmd
+          - file: books/miriam.qmd
+          - file: books/benjamin.qmd
+          - file: books/zoe.qmd
+          - file: books/alexander.qmd
 
 format:
   html:
+    page-layout: full
     theme:
-      - flatly
+      - zephyr
       - custom.scss

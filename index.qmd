@@ -1,18 +1,25 @@
 ---
 title: "The Heiss Family's 2024 books"
+execute:
+  echo: false
+  output: false
 format:
   dashboard: 
     scrolling: true
+include-before-body: 
+  text: |
+    <style>
+      #quarto-dashboard-header {
+        display: none;
+      }
+    </style>
 ---
 
 ```{ojs}
-//| include: false
-
-d3 = require('d3')
-
-results = await d3.json(
-  "https://api.andrewheiss.com/books?person=all"
-)
+results = await fetch("https://api.andrewheiss.com/books?person=all")
+  .then(response => {
+    return response.json();
+  })
 
 // This is wildly inefficient, but whatever
 data_alexander = results.alexander
@@ -23,8 +30,6 @@ data_rachel = results.rachel
 data_nancy = results.nancy
 data_andrew = results.andrew
 ```
-
-# Current books
 
 ## Alexander row {height=20%}
 
@@ -45,8 +50,8 @@ Alexander's total books
 ${data_alexander.count[0]}
 :::
 
-
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -101,6 +106,7 @@ ${data_zoe.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -155,6 +161,7 @@ ${data_benjamin.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -209,6 +216,7 @@ ${data_miriam.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -263,6 +271,7 @@ ${data_rachel.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -317,6 +326,7 @@ ${data_nancy.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -371,6 +381,7 @@ ${data_andrew.count[0]}
 
 
 ```{ojs}
+//| output: true
 Plot.plot({
   marginBottom: 0,
   marginLeft: 0,
@@ -402,8 +413,3 @@ Plot.plot({
   ]
 })
 ```
-
-
-# All books
-
-Do something where it shows a table of books filterable by person or something.

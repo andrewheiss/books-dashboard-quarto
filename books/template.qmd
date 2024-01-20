@@ -1,0 +1,68 @@
+:::: {.card .border-`r params$person_id` .border-3}
+
+::: {.card-header .text-bg-`r params$person_id` .rounded-0 .fw-bold .fs-4}
+All of `r params$person_name`'s books
+:::
+
+::: {.card-body}
+
+```{r}
+#| include: false
+ojs_define(person_id = params$person_id)
+```
+
+```{ojs}
+//| echo: false
+//| output: false
+results = await fetch("https://api.andrewheiss.com/books?person=" + person_id)
+  .then(response => {
+    return response.json();
+  })
+
+table_settings = {
+  return {
+    sort: "actual_time",
+    reverse: true,
+    rows: 11.5,
+    layout: "auto",
+    columns: [
+      "actual_time",
+      "title",
+      "author_name"
+    ],
+    header: {
+      actual_time: "Date",
+      title: "Title",
+      author_name: "Author"
+    },
+    format: {
+      actual_time: x => {
+        let date = new Date(x);
+        return date.toLocaleString('en-US', {
+          weekday: "long",
+          month: "long",
+          day: "numeric",
+          year: "numeric"
+        });
+      }
+    }
+  }
+}
+```
+
+```{ojs}
+//| echo: false
+//| output: true
+//| classes: search-bar
+viewof search_table = Inputs.search(results.data)
+```
+
+```{ojs}
+//| echo: false
+//| output: true
+//| classes: book-table
+Inputs.table(search_table, table_settings)
+```
+
+:::
+::::

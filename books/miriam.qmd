@@ -1,0 +1,16 @@
+---
+title: "Miriam's books"
+include-before-body: 
+  text: |
+    <style>
+      #title-block-header {
+        display: none;
+      }
+    </style>
+params:
+  person_name: "Miriam"
+  person_id: "miriam"
+---
+
+{{< include template.qmd >}}
+

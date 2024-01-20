@@ -1,0 +1,15 @@
+---
+title: "Nancy's books"
+include-before-body: 
+  text: |
+    <style>
+      #title-block-header {
+        display: none;
+      }
+    </style>
+params:
+  person_name: "Nancy"
+  person_id: "nancy"
+---
+
+{{< include template.qmd >}}

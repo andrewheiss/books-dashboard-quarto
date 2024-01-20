@@ -3,75 +3,66 @@
 // Colors from the Prism palette at https://carto.com/carto-colors/
 $navbar-bg: #666666;
 
-$clr-alexander: #1D6996;
-$clr-zoe: #5F4690;
-$clr-benjamin: #0F8554;
-$clr-miriam: #CC503E;
-$clr-rachel: #38A6A5;
-$clr-nancy: #94346E;
-$clr-andrew: #E17C05;
+$colors: (
+    alexander: #1D6996,
+    zoe: #5F4690,
+    benjamin: #0F8554,
+    miriam: #CC503E,
+    rachel: #38A6A5,
+    nancy: #94346E,
+    andrew: #E17C05
+);
+
 
 /*-- scss:rules --*/
 
-.btn-alexander {
-    @include button-variant($clr-alexander, darken($clr-alexander, 7.5%), color-contrast($clr-alexander));
+thead th {
+    text-transform: none;
 }
 
-.bg-alexander {
-    background-color: $clr-alexander;
-    color: color-contrast($clr-alexander);
+// Hide border of cards when they're nested inside a card-body 
+// (e.g. Observable Table inside a manual card)
+.card-body > .card {
+    border: none;
+    box-shadow: none;
 }
 
-.btn-zoe {
-    @include button-variant($clr-zoe, darken($clr-zoe, 7.5%), color-contrast($clr-zoe));
+.card-header p {
+    margin-bottom: 0;
 }
 
-.bg-zoe {
-    background-color: $clr-zoe;
-    color: color-contrast($clr-zoe);
+.search-bar {
+    margin-bottom: 1em;
+    font-size: 85%;
+    color: $navbar-bg;
+    
+    input[type="search"] {
+        border-width: 1px;
+    }
 }
 
-.btn-benjamin {
-    @include button-variant($clr-benjamin, darken($clr-benjamin, 7.5%), color-contrast($clr-benjamin));
+.cell.book-table {
+    table {
+        width: 100%;
+    }
+    
+    form {
+        padding-left: 0;
+    }
 }
 
-.bg-benjamin {
-    background-color: $clr-benjamin;
-    color: color-contrast($clr-benjamin);
-}
+@each $name, $color in $colors {
+    .btn-#{$name} {
+        @include button-variant($color, darken($color, 7.5%), color-contrast($color));
+    }
 
-.btn-miriam {
-    @include button-variant($clr-miriam, darken($clr-miriam, 7.5%), color-contrast($clr-miriam));
-}
+    .bg-#{$name},
+    .text-bg-#{$name} {
+        background-color: $color;
+        color: color-contrast($color);
+    }
 
-.bg-miriam {
-    background-color: $clr-miriam;
-    color: color-contrast($clr-miriam);
-}
-
-.btn-rachel {
-    @include button-variant($clr-rachel, darken($clr-rachel, 7.5%), color-contrast($clr-rachel));
-}
-
-.bg-rachel {
-    background-color: $clr-rachel;
-    color: color-contrast($clr-rachel);
-}
-
-.btn-nancy {
-    @include button-variant($clr-nancy, darken($clr-nancy, 7.5%), color-contrast($clr-nancy));
-}
-
-.bg-nancy {
-    background-color: $clr-nancy;
-    color: color-contrast($clr-nancy);
-}
-
-.btn-andrew {
-    @include button-variant($clr-andrew, darken($clr-andrew, 7.5%), color-contrast($clr-andrew));
-}
-
-.bg-andrew {
-    background-color: $clr-andrew;
-    color: color-contrast($clr-andrew);
+    .border-#{$name} {
+        border-color: $color;
+    }
 }
