@@ -36,7 +36,7 @@ data_andrew = results.andrew
 ::: {.card title="Alexander's books"}
 ```{=html}
 <p class="text-center">
-<a class="btn btn-alexander btn-lg" href="https://forms.gle/dtFtDZWRMxXbjvFg6" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+<a class="btn btn-alexander btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pag9iGipPatw8E34k/form?prefill_person=Alexander&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
 </p>
 ```
 
@@ -90,7 +90,7 @@ Plot.plot({
 ::: {.card title="Zoë's books"}
 ```{=html}
 <p class="text-center">
-<a class="btn btn-zoe btn-lg" href="https://forms.gle/MgW7HjMoeyZMJTYo9" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+<a class="btn btn-zoe btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pagKW8yyQDpq4XMsN/form?prefill_person=Zoë&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
 </p>
 ```
 
@@ -145,7 +145,7 @@ Plot.plot({
 ::: {.card title="Benjamin's books"}
 ```{=html}
 <p class="text-center">
-<a class="btn btn-benjamin btn-lg" href="https://forms.gle/oEgdqanWe6gkQz9W8" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
+<a class="btn btn-benjamin btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pag1lodqv7vZ4mWN6/form?prefill_person=Benjamin&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
 </p>
 ```
 
