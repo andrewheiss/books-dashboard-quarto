@@ -33,7 +33,7 @@ data_andrew = results.andrew
 
 ## Alexander row {height=20%}
 
-::: {.card title="Alexander's books"}
+::: {.card title="Alexander's books" .card-alexander}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-alexander btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pag9iGipPatw8E34k/form?prefill_person=Alexander&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -87,7 +87,7 @@ Plot.plot({
 
 ## Zoë row {height=20%}
 
-::: {.card title="Zoë's books"}
+::: {.card title="Zoë's books" .card-zoe}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-zoe btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pagKW8yyQDpq4XMsN/form?prefill_person=Zoë&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -142,7 +142,7 @@ Plot.plot({
 
 ## Benjamin row {height=20%}
 
-::: {.card title="Benjamin's books"}
+::: {.card title="Benjamin's books" .card-benjamin}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-benjamin btn-lg" href="https://airtable.com/appPKXaQbf0nZJsuN/pag1lodqv7vZ4mWN6/form?prefill_person=Benjamin&hide_person=true" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -197,7 +197,7 @@ Plot.plot({
 
 ## Miriam row {height=20%}
 
-::: {.card title="Miriam's books"}
+::: {.card title="Miriam's books" .card-miriam}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-miriam btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -252,7 +252,7 @@ Plot.plot({
 
 ## Rachel row {height=20%}
 
-::: {.card title="Rachel's books"}
+::: {.card title="Rachel's books" .card-rachel}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-rachel btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -307,7 +307,7 @@ Plot.plot({
 
 ## Nancy row {height=20%}
 
-::: {.card title="Nancy's books"}
+::: {.card title="Nancy's books" .card-nancy}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-nancy btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>
@@ -362,7 +362,7 @@ Plot.plot({
 
 ## Andrew row {height=20%}
 
-::: {.card title="Andrew's books"}
+::: {.card title="Andrew's books" .card-andrew}
 ```{=html}
 <p class="text-center">
 <a class="btn btn-andrew btn-lg" href="https://www.goodreads.com/" role="button" target="_blank" rel="noopener noreferrer">Write down a book</a>

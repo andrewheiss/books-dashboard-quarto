@@ -53,11 +53,17 @@ thead th {
 
 @each $name, $color in $colors {
     .btn-#{$name} {
-        @include button-variant($color, darken($color, 7.5%), color-contrast($color));
+        @include button-variant(
+            $background: mix(white, $color, 70%), 
+            $border: $color, 
+            $color: $color,
+            $hover-color: mix(black, $color, 30%)
+        );
     }
 
     .bg-#{$name},
-    .text-bg-#{$name} {
+    .text-bg-#{$name},
+    .card-#{$name} .card-header {
         background-color: $color;
         color: color-contrast($color);
     }
