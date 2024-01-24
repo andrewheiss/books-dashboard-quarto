@@ -1,5 +1,5 @@
-REMOTE_HOST="cloud"
-REMOTE_DIR="~/sites/heiss.website/books/public_html/2024"
+REMOTE_HOST="ath-cloud"
+REMOTE_DIR="~/sites/books.heiss.website/public/2024"
 REMOTE_DEST=$REMOTE_HOST:$REMOTE_DIR
 
 echo "Uploading new changes to remote server..."
