@@ -14,10 +14,18 @@ ojs_define(person_id = params$person_id)
 ```{ojs}
 //| echo: false
 //| output: false
+
+d3 = require("d3")
+
 results = await fetch("https://api.andrewheiss.com/books?person=" + person_id)
-  .then(response => {
-    return response.json();
-  })
+  .then(response => response.json())
+  .then(data => ({
+    ...data,
+    data: data.data.map(d => ({
+      ...d,
+      actual_time: new Date(d.actual_time)
+    }))
+  }));
 
 table_settings = {
   return {
@@ -36,15 +44,8 @@ table_settings = {
       author_name: "Author"
     },
     format: {
-      actual_time: x => {
-        let date = new Date(x);
-        return date.toLocaleString('en-US', {
-          weekday: "long",
-          month: "long",
-          day: "numeric",
-          year: "numeric"
-        });
-      }
+      // Format as nice date + remove 2 spaces for things like "January  2"
+      actual_time: d => d3.utcFormat("%A, %B %e, %Y")(d).replace(/  +/g, ' ')
     }
   }
 }
