@@ -23,29 +23,29 @@ results = await fetch("https://api.andrewheiss.com/books?person=" + person_id)
     ...data,
     data: data.data.map(d => ({
       ...d,
-      actual_time: new Date(d.actual_time)
+      timestamp: new Date(d.timestamp)
     }))
   }));
 
 table_settings = {
   return {
-    sort: "actual_time",
+    sort: "timestamp",
     reverse: true,
     rows: 11.5,
     layout: "auto",
     columns: [
-      "actual_time",
+      "timestamp",
       "title",
       "author_name"
     ],
     header: {
-      actual_time: "Date",
+      timestamp: "Date",
       title: "Title",
       author_name: "Author"
     },
     format: {
       // Format as nice date + remove 2 spaces for things like "January  2"
-      actual_time: d => d3.utcFormat("%A, %B %e, %Y")(d).replace(/  +/g, ' ')
+      timestamp: d => d3.utcFormat("%A, %B %e, %Y")(d).replace(/  +/g, ' ')
     }
   }
 }

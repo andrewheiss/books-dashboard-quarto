@@ -24,7 +24,7 @@ books = await fetch("https://api.andrewheiss.com/books?person=all")
     for (let person in people) {
       people[person].data = people[person].data.map(d => ({
         ...d,
-        actual_time: new Date(d.actual_time)
+        timestamp: new Date(d.timestamp)
       }));
     }
     return people;
@@ -76,7 +76,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#1D6996",
           interval: d3.utcMonth,
@@ -141,7 +141,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#5F4690",
           size: 5,
@@ -207,7 +207,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#0F8554",
           interval: d3.utcMonth,
@@ -272,7 +272,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#CC503E",
           interval: d3.utcMonth,
@@ -337,7 +337,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#38A6A5",
           interval: d3.utcMonth,
@@ -402,7 +402,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#94346E",
           interval: d3.utcMonth,
@@ -467,7 +467,7 @@ Plot.plot({
       Plot.binX(
         {y: "count"},  // Reducing function
         {
-          x: "actual_time", 
+          x: "timestamp", 
           y: "total", 
           fill: "#E17C05",
           interval: d3.utcMonth,
