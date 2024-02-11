@@ -16,19 +16,19 @@ include-before-body:
 ---
 
 ```{ojs}
-results = await fetch("https://api.andrewheiss.com/books?person=all")
-  .then(response => {
-    return response.json();
-  })
+d3 = require("d3")
 
-// This is wildly inefficient, but whatever
-data_alexander = results.alexander
-data_zoe = results.zoe
-data_benjamin = results.benjamin
-data_miriam = results.miriam
-data_rachel = results.rachel
-data_nancy = results.nancy
-data_andrew = results.andrew
+books = await fetch("https://api.andrewheiss.com/books?person=all")
+  .then(response => response.json())
+  .then(people => {
+    for (let person in people) {
+      people[person].data = people[person].data.map(d => ({
+        ...d,
+        actual_time: new Date(d.actual_time)
+      }));
+    }
+    return people;
+  })
 ```
 
 ## Alexander row {height=20%}
@@ -40,46 +40,57 @@ data_andrew = results.andrew
 </p>
 ```
 
-**Last read:** \${data_alexander.most_recent.author}, *\${data_alexander.most_recent.title}* on \${data_alexander.most_recent.date}
+**Last read:** \${books.alexander.most_recent.author}, *\${books.alexander.most_recent.title}* on \${books.alexander.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="alexander"}
 Alexander's total books
 
-${data_alexander.count[0]}
+${books.alexander.count[0]}
 :::
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
+  
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_alexander.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_alexander.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#1D6996",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.alexander.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#1D6996",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -94,47 +105,58 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_zoe.most_recent.author}, *\${data_zoe.most_recent.title}* on \${data_zoe.most_recent.date}
+**Last read:** \${books.zoe.most_recent.author}, *\${books.zoe.most_recent.title}* on \${books.zoe.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="zoe"}
 Zoë's total books
 
-${data_zoe.count[0]}
+${books.zoe.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_zoe.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_zoe.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#5F4690",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.zoe.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#5F4690",
+          size: 5,
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -149,47 +171,57 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_benjamin.most_recent.author}, *\${data_benjamin.most_recent.title}* on \${data_benjamin.most_recent.date}
+**Last read:** \${books.benjamin.most_recent.author}, *\${books.benjamin.most_recent.title}* on \${books.benjamin.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="benjamin"}
 Benjamin's total books
 
-${data_benjamin.count[0]}
+${books.benjamin.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_benjamin.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_benjamin.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#0F8554",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.benjamin.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#0F8554",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -204,47 +236,57 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_miriam.most_recent.author}, *\${data_miriam.most_recent.title}* on \${data_miriam.most_recent.date}
+**Last read:** \${books.miriam.most_recent.author}, *\${books.miriam.most_recent.title}* on \${books.miriam.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="miriam"}
 Miriam's total books
 
-${data_miriam.count[0]}
+${books.miriam.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_miriam.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_miriam.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#CC503E",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.miriam.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#CC503E",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -259,47 +301,57 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_rachel.most_recent.author}, *\${data_rachel.most_recent.title}* on \${data_rachel.most_recent.date}
+**Last read:** \${books.rachel.most_recent.author}, *\${books.rachel.most_recent.title}* on \${books.rachel.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="rachel"}
 Rachel's total books
 
-${data_rachel.count[0]}
+${books.rachel.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_rachel.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_rachel.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#38A6A5",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.rachel.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#38A6A5",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -314,47 +366,57 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_nancy.most_recent.author}, *\${data_nancy.most_recent.title}* on \${data_nancy.most_recent.date}
+**Last read:** \${books.nancy.most_recent.author}, *\${books.nancy.most_recent.title}* on \${books.nancy.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="nancy"}
 Nancy's total books
 
-${data_nancy.count[0]}
+${books.nancy.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_nancy.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_nancy.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#94346E",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.nancy.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#94346E",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
@@ -369,47 +431,57 @@ Plot.plot({
 </p>
 ```
 
-**Last read:** \${data_andrew.most_recent.author}, *\${data_andrew.most_recent.title}* on \${data_andrew.most_recent.date}
+**Last read:** \${books.andrew.most_recent.author}, *\${books.andrew.most_recent.title}* on \${books.andrew.most_recent.date}
 :::
 
 
 ::: {.valuebox icon="book" color="andrew"}
 Andrew's total books
 
-${data_andrew.count[0]}
+${books.andrew.count[0]}
 :::
 
 
 ```{ojs}
 //| output: true
 Plot.plot({
+  style: {
+    fontSize: "14px",
+    fontFamily: "Libre Franklin",
+  },
   marginBottom: 0,
   marginLeft: 0,
   y: {
     label: "Books read",
     grid: false,
-    percent: false
   },
   x: {
     label: "Month",
-    domain: data_andrew.monthly_count.map(d => d.read_month_fct),
+    domain: [new Date("2024-01-01"), new Date("2024-12-31")]
   },
   marks: [
-    Plot.ruleY([0]),
     Plot.axisX({label: null, ticks: null}),
     Plot.axisY({label: null, ticks: null}),
 
-    Plot.barY(data_andrew.monthly_count, {
-      x: "read_month_fct", 
-      y: "count", 
-      fill: "#E17C05",
-      tip: {
-        format: {
-          x: true,
-          y: true
+    Plot.rectY(books.andrew.data, 
+      Plot.binX(
+        {y: "count"},  // Reducing function
+        {
+          x: "actual_time", 
+          y: "total", 
+          fill: "#E17C05",
+          interval: d3.utcMonth,
+          inset: 2,
+          tip: {
+            format: {
+              x1: (d) => d3.utcFormat("%B")(d),
+              x2: false,
+              y: true
+            }
+          }
         }
-      }
-    })
+      )
+    )
   ]
 })
 ```
