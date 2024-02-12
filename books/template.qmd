@@ -23,29 +23,29 @@ results = await fetch("https://api.andrewheiss.com/books?person=" + person_id)
     ...data,
     data: data.data.map(d => ({
       ...d,
-      timestamp: new Date(d.timestamp)
+      timestamp_local: new Date(d.timestamp_local_as_utc),
     }))
   }));
 
 table_settings = {
   return {
-    sort: "timestamp",
+    sort: "timestamp_local",
     reverse: true,
     rows: 11.5,
     layout: "auto",
     columns: [
-      "timestamp",
+      "timestamp_local",
       "title",
       "author_name"
     ],
     header: {
-      timestamp: "Date",
+      timestamp_local: "Date",
       title: "Title",
       author_name: "Author"
     },
     format: {
-      // Format as nice date + remove 2 spaces for things like "January  2"
-      timestamp: d => d3.utcFormat("%A, %B %e, %Y")(d).replace(/  +/g, ' ')
+      // Format as nice date + remove 2 spaces for things like "January  2" + remove leading 0 for hours
+      timestamp_local: d => d3.utcFormat("%A, %B %e, %Y at %I:%M %p")(d).replace(/  +/g, ' ').replace(/ 0(\d):/, ' $1:')
     }
   }
 }
