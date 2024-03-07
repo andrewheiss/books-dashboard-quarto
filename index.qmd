@@ -15,20 +15,112 @@ include-before-body:
     </style>
 ---
 
+::: {.content-hidden}
+↓ Include FontAwesome without shortcodes by cheating and adding a shortcode ↓
+https://github.com/quarto-ext/fontawesome/issues/30
+:::
+
+<div style="display:none;">{{< fa thumbs-up >}}</div>
+
+
+::: {.content-hidden}
+Avoid ugly repetitive OJS errors that appear while data is loading by providing a default data structure for each person, but with placeholder icons instead of actual content. These all get replaced either with the actual data from the API or with errors.
+
+Adapted in part from <https://github.com/quarto-dev/quarto-cli/discussions/7485>
+:::
+
+```{ojs}
+all_people = ["alexander", "andrew", "benjamin", "miriam", "nancy", "rachel", "zoe"]
+
+schema_loading = all_people
+  .reduce((obj, person) => {
+    obj[person] = {
+      name: [person],
+      count: [html`<i class="fa fa-clock fa-spin"></i>`],
+      most_recent: {
+        title: [html` <i class="fa-solid fa-ellipsis fa-fade"></i>`],
+        author: [html` <i class="fa-solid fa-ellipsis fa-fade"></i>`],
+        date: [html` <i class="fa-solid fa-ellipsis fa-fade"></i>`]
+      },
+      data: {
+        timestamp_local: null,
+        total: null
+      }
+    };
+    return obj;
+  }, {});
+
+schema_404 = all_people
+  .reduce((obj, person) => {
+    obj[person] = {
+      name: [person],
+      count: [html`<span class="fa-stack"><i class="fa-solid fa-cloud fa-stack-1x"></i><i class="fa-solid fa-slash fa-stack-1x" style="color:#FF4136"></i></span>`],
+      most_recent: {
+        title: [html` <i class="fa-solid fa-triangle-exclamation"></i>`],
+        author: [html` <i class="fa-solid fa-triangle-exclamation"></i>`],
+        date: [html` <i class="fa-solid fa-triangle-exclamation"></i>`]
+      },
+      data: {
+        timestamp_local: null,
+        total: null
+      }
+    };
+    return obj;
+  }, {});
+
+schema_error = all_people
+  .reduce((obj, person) => {
+    obj[person] = {
+      name: [person],
+      count: [html`<i class="fa-solid fa-bomb"></i>`],
+      most_recent: {
+        title: [html` <i class="fa-solid fa-bomb"></i>`],
+        author: [html` <i class="fa-solid fa-bomb"></i>`],
+        date: [html` <i class="fa-solid fa-bomb"></i>`]
+      },
+      data: {
+        timestamp_local: null,
+        total: null
+      }
+    };
+    return obj;
+  }, {});
+```
+
 ```{ojs}
 d3 = require("d3")
 
-books = await fetch("https://api.andrewheiss.com/books?person=all")
-  .then(response => response.json())
-  .then(people => {
-    for (let person in people) {
-      people[person].data = people[person].data.map(d => ({
-        ...d,
-        timestamp_local: new Date(d.timestamp_local_as_utc)
-      }));
-    }
-    return people;
-  })
+books = {
+  // Provide an empty array with placeholder values until the data loads
+  yield schema_loading
+  // yield undefined
+  
+  yield fetch("https://api.andrewheiss.com/books?person=all")
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network error');
+      }
+      return response.json();
+    })
+    .then(people => {
+      for (let person in people) {
+        people[person].data = people[person].data.map(d => ({
+          ...d,
+          timestamp_local: new Date(d.timestamp_local_as_utc)
+        }));
+      }
+      return people;
+    })
+    .catch(error => {
+      if (error.message === 'Network error') {
+        console.error('Error with the API call:', error);
+        return schema_404;
+      } else {
+        console.error('Some general error:', error);
+        return schema_error;
+      }
+    });
+}
 ```
 
 ## Alexander row {height=20%}
