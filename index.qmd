@@ -95,7 +95,7 @@ books = {
   yield schema_loading
   // yield undefined
   
-  yield fetch("https://api.andrewheiss.com/books?person=all")
+  yield fetch("https://api.andrewheiss.com/books?person=all&start_date=2024-01-01&end_date=2024-12-31")
     .then(response => {
       if (!response.ok) {
         throw new Error('Network error');

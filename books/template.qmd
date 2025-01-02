@@ -17,7 +17,7 @@ ojs_define(person_id = params$person_id)
 
 d3 = require("d3")
 
-results = await fetch("https://api.andrewheiss.com/books?person=" + person_id)
+results = await fetch("https://api.andrewheiss.com/books?person=" + person_id + "&start_date=2024-01-01&end_date=2024-12-31")
   .then(response => response.json())
   .then(data => ({
     ...data,
